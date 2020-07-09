@@ -26,13 +26,5 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
-  },
-  globals: {
-    FLPPDeviceInfo: false,
-    PPJSBridge: false,
-    Sentry: false,
-    html2canvas: false,
-    QRCode: false,
-    Swiper: false,
-  },
+  }
 };
