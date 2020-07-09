@@ -1,0 +1,31 @@
+{
+  "name": "pipi-cli",
+  "version": "1.0.0",
+  "description": "皮皮PiPi cli",
+  "bin": {
+    "pipi": "bin/pipi.js"
+  },
+  "author": "apeiwan",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.8.4",
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0",
+    "cssnano": "^4.1.10",
+    "dayjs": "^1.8.29",
+    "eslint": "^7.4.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-inline": "^2.2.3",
+    "gulp-htmlclean": "^2.7.22",
+    "gulp-postcss": "^8.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-util": "^3.0.8",
+    "inquirer": "^7.3.0",
+    "lodash.find": "^4.6.0",
+    "lodash.mergewith": "^4.6.2",
+    "minimist": "^1.2.5",
+    "ora": "^4.0.4",
+    "shelljs": "^0.8.4"
+  }
+}

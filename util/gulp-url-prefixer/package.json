@@ -1,0 +1,76 @@
+{
+  "_from": "gulp-url-prefixer@0.0.6",
+  "_id": "gulp-url-prefixer@0.0.6",
+  "_inBundle": false,
+  "_integrity": "sha1-wV2rEZiFBaC5bWLD4DJQ1p02LPg=",
+  "_location": "/gulp-url-prefixer",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "gulp-url-prefixer@0.0.6",
+    "name": "gulp-url-prefixer",
+    "escapedName": "gulp-url-prefixer",
+    "rawSpec": "0.0.6",
+    "saveSpec": null,
+    "fetchSpec": "0.0.6"
+  },
+  "_requiredBy": [
+    "/pipi-h5-cli"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/gulp-url-prefixer/download/gulp-url-prefixer-0.0.6.tgz",
+  "_shasum": "c15dab11988505a0b96d62c3e03250d69d362cf8",
+  "_spec": "gulp-url-prefixer@0.0.6",
+  "_where": "/Users/xiaominggong/workspace/pipiweb/app-word-h5/node_modules/pipi-h5-cli",
+  "author": {
+    "name": "Louie Lang",
+    "email": "cainiaokan@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/cainiaokan/gulp-url-prefixer/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.0"
+  },
+  "deprecated": false,
+  "description": "prefix urls of static assets in a flexible way",
+  "devDependencies": {
+    "coveralls": "^2.11.8",
+    "gulp": "^3.9.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.2.5",
+    "pre-commit": "^1.0.10",
+    "should": "^8.2.2",
+    "standard": "^6.0.8"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "homepage": "https://github.com/cainiaokan/gulp-url-prefixer",
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "url",
+    "prefix",
+    "cdn"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "gulp-url-prefixer",
+  "pre-commit": [
+    "standard",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cainiaokan/gulp-url-prefixer.git"
+  },
+  "scripts": {
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "standard": "standard",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha test/**/test.js -- --require should -R spec"
+  },
+  "version": "0.0.6"
+}
