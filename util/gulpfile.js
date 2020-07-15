@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-require('shelljs/global')
-var gulp = require('gulp');
-var path = require('path');
-var urlPrefixer = require('./gulp-url-prefixer');
-var postcss = require('gulp-postcss')
-var postcssConfig = require('./postcssConfig')
-var minimist = require('minimist');
-var fileInline = require('gulp-file-inline');
-var shell = require('shelljs');
-var htmlclean = require('gulp-htmlclean');
-var uglify = require('gulp-uglify');
+require('shelljs/global');
+let gulp = require('gulp');
+let path = require('path');
+let urlPrefixer = require('./gulp-url-prefixer');
+let postcss = require('gulp-postcss');
+let postcssConfig = require('./postcssConfig');
+let minimist = require('minimist');
+let fileInline = require('gulp-file-inline');
+let shell = require('shelljs');
+let htmlclean = require('gulp-htmlclean');
+let uglify = require('gulp-uglify');
 
 /**
  * 获取打包参数
@@ -44,36 +44,36 @@ let pluginsConfig = {
 
 gulp.task('misc', function () {
   return gulp.src('./src/**/*', { base: './src' })
-    .pipe(gulp.dest(build))
-})
+    .pipe(gulp.dest(build));
+});
 
 gulp.task('css', function () {
   return gulp.src(dirs.source.css, { base: './src' })
     .pipe(urlPrefixer.css(pluginsConfig.urlPrefixer))
     .pipe(postcss(postcssConfig))
-    .pipe(gulp.dest(build))
+    .pipe(gulp.dest(build));
 });
 
 gulp.task('images', function () {
   return gulp.src(dirs.source.images, { base: './src' })
-    .pipe(gulp.dest(build))
+    .pipe(gulp.dest(build));
 });
 
 gulp.task('scripts', function () {
   return gulp.src(dirs.source.scripts, { base: './src' })
     .pipe(uglify())
-    .pipe(gulp.dest(build))
+    .pipe(gulp.dest(build));
 });
 
 gulp.task('html', function () {
   const ext2CDN = function (pathname) {
     const extname = path.extname(pathname);
     if (extname.indexOf('.html') === -1) {
-      return cdn
+      return cdn;
     } else if (extname.indexOf('.html') !== -1) {
-      return publicPath
+      return publicPath;
     }
-    return ''
+    return '';
   };
   return gulp.src(dirs.source.html, { base: './src' })
     .pipe(fileInline({
@@ -92,7 +92,7 @@ gulp.task('html', function () {
     .pipe(urlPrefixer.html({
       prefix: ext2CDN
     }))
-    .pipe(gulp.dest(build))
+    .pipe(gulp.dest(build));
 });
 
 gulp.task('clean', function (done) {

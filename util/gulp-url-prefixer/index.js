@@ -1,149 +1,149 @@
-var gutil = require('gulp-util')
-var path = require('path')
-var through = require('through2')
-var PLUGIN_NAME = 'gulp-url-prefixer'
+let gutil = require('gulp-util');
+let path = require('path');
+let through = require('through2');
+let PLUGIN_NAME = 'gulp-url-prefixer';
 
-var default_conf = {
+let default_conf = {
   tags: ['script', 'link', 'a', 'img', 'embed'],
   attrs: ['src', 'href'],
   prefix: 'http://localhost/',
   placeholderFuncName: '__uri'
-}
+};
 
-var config = {}
+let config = {};
 
-var processConf = function (conf) {
+let processConf = function (conf) {
   Object.keys(default_conf).forEach(function (key) {
-    config[key] = conf[key] || default_conf[key]
-  })
-}
+    config[key] = conf[key] || default_conf[key];
+  });
+};
 
-var buildHtmlTagRegex = function () {
-  var tags = config.tags
-  return new RegExp('<\\s*(' + tags.join('|') + ')[\\s\\S]*?>', 'g')
-}
+let buildHtmlTagRegex = function () {
+  let tags = config.tags;
+  return new RegExp('<\\s*(' + tags.join('|') + ')[\\s\\S]*?>', 'g');
+};
 
-var buildHtmlAttrRegex = function () {
-  var attrs = config.attrs
-  return new RegExp('(' + attrs.join('|') + ')=([\'"]?)([\\s\\S]*?)(\\?[\\s\\S]*?)?\\2', 'g')
-}
+let buildHtmlAttrRegex = function () {
+  let attrs = config.attrs;
+  return new RegExp('(' + attrs.join('|') + ')=([\'"]?)([\\s\\S]*?)(\\?[\\s\\S]*?)?\\2', 'g');
+};
 
-var buildCssRegex = function () {
-  return /url\((['"])?([\s\S]+?)(\?[\s\S]*?)?\1\)/g
-}
+let buildCssRegex = function () {
+  return /url\((['"])?([\s\S]+?)(\?[\s\S]*?)?\1\)/g;
+};
 
-var buildJsRegex = function () {
-  return new RegExp(config.placeholderFuncName + '\\s*\\(\\s*([\'"])([\\s\\S]+?)(\\?[\\s\\S]*?)?\\1([\\s\\S]*?)\\)', 'g')
-}
+let buildJsRegex = function () {
+  return new RegExp(config.placeholderFuncName + '\\s*\\(\\s*([\'"])([\\s\\S]+?)(\\?[\\s\\S]*?)?\\1([\\s\\S]*?)\\)', 'g');
+};
 
-var buildUrl = function (file, url, prefix) {
+let buildUrl = function (file, url, prefix) {
   if (url.charAt(0) === '/') {
-    url = url.substring(1)
+    url = url.substring(1);
   } else {
-    url = path.join(path.dirname(file.relative), url)
+    url = path.join(path.dirname(file.relative), url);
   }
 
-  url = path.normalize(url)
+  url = path.normalize(url);
 
   if (prefix.charAt(prefix.length - 1) !== '/') {
-    prefix += '/'
+    prefix += '/';
   }
 
-  url = prefix + url
+  url = prefix + url;
 
   if (process.platform === 'win32') {
-    url = url.replace(/\\+/g, '/')
+    url = url.replace(/\\+/g, '/');
   }
 
-  return url
-}
+  return url;
+};
 
-var autoHtmlUrl = function (file, tagReg, attrReg) {
-  var prefix = config.prefix
-  var contents = file.contents.toString().replace(tagReg, function (match, tagName) {
+let autoHtmlUrl = function (file, tagReg, attrReg) {
+  let prefix = config.prefix;
+  let contents = file.contents.toString().replace(tagReg, function (match, tagName) {
     return match.replace(attrReg, function (__, attrName, delimiter, url, search) {
       if (url.indexOf(':') === -1 && /[\w\/\.]/.test(url.charAt(0))) {
-        url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix)
-        delimiter = delimiter || ''
-        search = search || ''
-        return attrName + '=' + delimiter + url + search + delimiter
+        url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix);
+        delimiter = delimiter || '';
+        search = search || '';
+        return attrName + '=' + delimiter + url + search + delimiter;
       } else {
-        return __
+        return __;
       }
-    })
-  })
-  file.contents = new Buffer(contents)
-}
+    });
+  });
+  file.contents = new Buffer(contents);
+};
 
-var autoCssUrl = function (file, reg) {
-  var prefix = config.prefix
-  var contents = file.contents.toString().replace(reg, function (match, delimiter, url, search) {
+let autoCssUrl = function (file, reg) {
+  let prefix = config.prefix;
+  let contents = file.contents.toString().replace(reg, function (match, delimiter, url, search) {
     if (url.indexOf(':') === -1 && /[\w\/\.]/.test(url.charAt(0))) {
-      delimiter = delimiter || ''
-      search = search || ''
-      url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix)
-      return 'url(' + delimiter + url + search + delimiter + ')'
+      delimiter = delimiter || '';
+      search = search || '';
+      url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix);
+      return 'url(' + delimiter + url + search + delimiter + ')';
     } else {
-      return match
+      return match;
     }
-  })
-  file.contents = new Buffer(contents)
-}
+  });
+  file.contents = new Buffer(contents);
+};
 
-var autoJsUrl = function (file, reg) {
-  var prefix = config.prefix
+let autoJsUrl = function (file, reg) {
+  let prefix = config.prefix;
 
-  var contents = file.contents.toString().replace(reg, function (match, delimiter, url, search, appendix) {
+  let contents = file.contents.toString().replace(reg, function (match, delimiter, url, search, appendix) {
     if (url.indexOf(':') === -1) {
-      delimiter = delimiter || ''
-      search = search || ''
-      appendix = appendix || ''
+      delimiter = delimiter || '';
+      search = search || '';
+      appendix = appendix || '';
 
-      url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix)
-      url = delimiter + url + search + delimiter + appendix
-      return url
+      url = buildUrl(file, url, typeof prefix === 'function' ? prefix(url) : prefix);
+      url = delimiter + url + search + delimiter + appendix;
+      return url;
     } else {
-      return match
+      return match;
     }
-  })
+  });
 
-  file.contents = new Buffer(contents)
-}
+  file.contents = new Buffer(contents);
+};
 
 exports.js = function (conf) {
-  processConf(conf)
-  var reg = buildJsRegex()
+  processConf(conf);
+  let reg = buildJsRegex();
   return through.obj(function (file, encoding, cb) {
     if (file.isStream()) {
-      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'))
+      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    autoJsUrl(file, reg)
-    cb(null, file)
-  })
-}
+    autoJsUrl(file, reg);
+    cb(null, file);
+  });
+};
 
 exports.css = function (conf) {
-  processConf(conf)
-  var reg = buildCssRegex()
+  processConf(conf);
+  let reg = buildCssRegex();
   return through.obj(function (file, encoding, cb) {
     if (file.isStream()) {
-      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'))
+      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    autoCssUrl(file, reg)
-    cb(null, file)
-  })
-}
+    autoCssUrl(file, reg);
+    cb(null, file);
+  });
+};
 
 exports.html = function (conf) {
-  processConf(conf)
-  var tagReg = buildHtmlTagRegex()
-  var attrReg = buildHtmlAttrRegex()
+  processConf(conf);
+  let tagReg = buildHtmlTagRegex();
+  let attrReg = buildHtmlAttrRegex();
   return through.obj(function (file, encoding, cb) {
     if (file.isStream()) {
-      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'))
+      return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    autoHtmlUrl(file, tagReg, attrReg)
-    cb(null, file)
-  })
-}
+    autoHtmlUrl(file, tagReg, attrReg);
+    cb(null, file);
+  });
+};
 

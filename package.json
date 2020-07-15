@@ -5,10 +5,14 @@
   "bin": {
     "pipi": "bin/pipi.js"
   },
+  "scripts": {
+    "lint": "eslint --fix"
+  },
   "author": "apeiwan",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^9.8.4",
+    "babel-eslint": "^10.1.0",
     "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "cssnano": "^4.1.10",
@@ -21,6 +25,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
+    "husky": "^4.2.5",
     "inquirer": "^7.3.0",
     "lodash.find": "^4.6.0",
     "lodash.mergewith": "^4.6.2",
@@ -29,6 +34,11 @@
     "shelljs": "^0.8.4"
   },
   "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/apeiwan/pipi-cli.git"

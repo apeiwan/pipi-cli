@@ -1,11 +1,14 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
-  extends: [
-    'eslint:recommended'
-  ],
+  extends: 'eslint:recommended',
+  parserOptions: {
+    ecmaVersion: 8,
+    sourceType: 'module',
+    parser: 'babel-eslint',
+  },
   rules: {
     indent: [2, 2],
     'object-curly-spacing': [2, 'always'],
@@ -20,11 +23,9 @@ module.exports = {
     'func-names': 0,
     'object-shorthand': 0,
     semi: ['error', 'always', { omitLastInOneLineBlock: true }],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
   },
-  parserOptions: {
-    parser: 'babel-eslint',
-  }
+  globals: {
+    exec: false
+  },
 };

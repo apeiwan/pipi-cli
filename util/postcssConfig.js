@@ -1,5 +1,5 @@
-var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
+let autoprefixer = require('autoprefixer');
+let cssnano = require('cssnano');
 module.exports = [
   autoprefixer({
     overrideBrowserslist: [
