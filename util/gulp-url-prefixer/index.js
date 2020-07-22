@@ -3,7 +3,7 @@ let path = require('path');
 let through = require('through2');
 let PLUGIN_NAME = 'gulp-url-prefixer';
 
-let default_conf = {
+let defaultConf = {
   tags: ['script', 'link', 'a', 'img', 'embed'],
   attrs: ['src', 'href'],
   prefix: 'http://localhost/',
@@ -13,8 +13,8 @@ let default_conf = {
 let config = {};
 
 let processConf = function (conf) {
-  Object.keys(default_conf).forEach(function (key) {
-    config[key] = conf[key] || default_conf[key];
+  Object.keys(defaultConf).forEach(function (key) {
+    config[key] = conf[key] || defaultConf[key];
   });
 };
 
