@@ -1,6 +1,6 @@
 {
   "name": "@apeiwan/pipi-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "皮皮PiPi cli",
   "bin": {
     "pipi": "bin/pipi.js"
@@ -10,7 +10,7 @@
   },
   "author": "pipipeilian",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^9.8.4",
     "babel-eslint": "^10.1.0",
     "chalk": "^4.1.0",
@@ -33,7 +33,6 @@
     "ora": "^4.0.4",
     "shelljs": "^0.8.4"
   },
-  "dependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
