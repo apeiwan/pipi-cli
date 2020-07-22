@@ -2,6 +2,7 @@
 const program = require('commander');
 const chalk = require('chalk');
 const cleanArgs = require('../util/cleanArgs');
+const config = require('../util/config');
 
 program
   .version(`@pipi/cli ${require('../package').version}`)
@@ -10,7 +11,7 @@ program
 program
   .command('publish [project-path]')
   .description('项目部署')
-  .option('--env <env>', '指定的打包环境 [ staging staging2 staging3 staging4 preview production ]')
+  .option('--env <env>', `指定的打包环境 [${config.BUILD_ENV.join(' ')}]`)
   .action(function(project, cmd){
     require('../lib/publish')(project, cleanArgs(cmd));
   });
