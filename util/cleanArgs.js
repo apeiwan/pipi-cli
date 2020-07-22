@@ -5,22 +5,21 @@
  * @returns {*}
  */
 function camelize (str) {
-  return str.replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '')
+  return str.replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '');
 }
 
 // commander passes the Command object itself as options,
 // extract only actual options into a fresh object.
-module.exports=function(cmd) {
-  const args = {}
+module.exports = function(cmd) {
+  const args = {};
   // console.warn('cmd.options:::',cmd.options)
   cmd.options.forEach(o => {
-    const key = camelize(o.long.replace(/^--/, ''))
+    const key = camelize(o.long.replace(/^--/, ''));
     // if an option is not present and Command has a method with the same name
     // it should not be copied
     if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
-      console.warn('cmd:::',cmd)
-      args[key] = cmd[key]
+      args[key] = cmd[key];
     }
-  })
-  return args
-}
+  });
+  return args;
+};
