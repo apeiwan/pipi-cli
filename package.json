@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --fix"
   },
-  "author": "apeiwan",
+  "author": "pipipeilian",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^9.8.4",
