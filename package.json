@@ -1,6 +1,6 @@
 {
   "name": "@apeiwan/pipi-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "皮皮PiPi cli",
   "bin": {
     "pipi": "bin/pipi.js"
@@ -31,7 +31,8 @@
     "lodash.mergewith": "^4.6.2",
     "minimist": "^1.2.5",
     "ora": "^4.0.4",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "validate-npm-package-name": "^3.0.0"
   },
   "husky": {
     "hooks": {

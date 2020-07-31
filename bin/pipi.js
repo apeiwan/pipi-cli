@@ -16,6 +16,13 @@ program
     require('../lib/publish')(project, cleanArgs(cmd));
   });
 
+program
+  .command('create <app-name>')
+  .description('初始化一个项目模板')
+  .action(function(name, cmd){
+    require('../lib/create')(name, cleanArgs(cmd));
+  });
+
 // add some useful info on help
 program.on('--help', () => {
   console.log();
