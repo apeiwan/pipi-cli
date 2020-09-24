@@ -41,7 +41,6 @@ let pluginsConfig = {
   }
 };
 
-
 gulp.task('misc', function () {
   return gulp.src('./src/**/*', { base: './src' })
     .pipe(gulp.dest(build));
