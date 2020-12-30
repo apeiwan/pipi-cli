@@ -1,6 +1,6 @@
 {
   "name": "@apeiwan/pipi-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "皮皮PiPi cli",
   "bin": {
     "pipi": "bin/pipi.js"
