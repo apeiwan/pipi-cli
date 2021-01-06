@@ -35,7 +35,7 @@ let checkBranceCommitFile = function () {
 };
 
 let crossEnv = function (key, value) {
-  return (process.platform === 'darwin' ? 'export' : 'set') + ' ' + key + '=' + value;
+  return ((process.platform === 'darwin' || process.platform === 'linux') ? 'export' : 'set') + ' ' + key + '=' + value;
 };
 
 // 检测远程所有tag标签是否已存在本地
